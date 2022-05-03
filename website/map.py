@@ -5,9 +5,8 @@ import folium
 from folium.plugins import MarkerCluster
 from folium.plugins import HeatMap
 
-df = pd.read_csv('data/Lincolnshire_Crime_Data_2021.csv')
-df = df.drop(columns=['Context', 'Crime ID'], axis = 1)
-
+df = pd.read_csv('data/map.csv')
+df = df.drop(columns=['Context', 'Crime ID', 'Reported by', 'Falls within', 'Last outcome category', 'LSOA code','LSOA name' ], axis = 1)
 
 
 
@@ -20,6 +19,8 @@ lat = df['Latitude'].tolist()
 lng = df['Longitude'].tolist()
 offense = df['Crime type'].tolist()
 locations = list(zip(lat, lng))
+
+
 
 marker_cluster = MarkerCluster(
     name="Crimes by Marker",
