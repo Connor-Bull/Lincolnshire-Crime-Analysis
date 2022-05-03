@@ -5,7 +5,7 @@ import folium
 from folium.plugins import MarkerCluster
 from folium.plugins import HeatMap
 
-df = pd.read_csv('app/Lincolnshire_Crime_Data_2021.csv')
+df = pd.read_csv('data/Lincolnshire_Crime_Data_2021.csv')
 df = df.drop(columns=['Context', 'Crime ID'], axis = 1)
 
 
