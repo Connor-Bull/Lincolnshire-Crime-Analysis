@@ -47,7 +47,8 @@ HeatMap(
 folium.LayerControl().add_to(map)
 
 html_map = map._repr_html_()
-app = Flask(__name__)
+
+from website import app
 
 @app.route("/")
 def index():
