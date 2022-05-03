@@ -52,5 +52,5 @@ from website import app
 
 @app.route("/")
 def index():
-    return render_template("index.html", map = html_map)
+    return render_template(map = html_map)
 
