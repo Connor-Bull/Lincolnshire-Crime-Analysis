@@ -49,9 +49,3 @@ folium.LayerControl().add_to(map)
 
 html_map = map._repr_html_()
 
-from website import app
-
-@app.route("/")
-def index():
-    return render_template(map = html_map)
-
