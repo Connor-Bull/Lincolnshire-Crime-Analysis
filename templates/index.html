@@ -2,138 +2,156 @@
 <html lang="en">
 
 <html>
-    <head>
 
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lincolnshire Crime Analysis</title>
+<head>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lincolnshire Crime Analysis</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
 
 
-        <!-- style.css -->
-        <link rel="stylesheet" type="text/css" href="static/index.css" />
+    <!-- style.css -->
+    <link rel="stylesheet" type="text/css" href="static/index.css" />
 
-    </head>
-    
-    <body>
+</head>
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-            <span class="navbar-brand">Lincolnshire Crime Analysis</span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">2021 Crime Heatmap</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">2021 Crime statitics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">2021 Crime Forecasting</a>
-                    </li>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <span class="navbar-brand">Lincolnshire Crime Analysis</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">2021 Crime Heatmap</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">2021 Crime statitics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">2021 Crime Forecasting</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="welcome container my-3" id="S1">
+        <div class="row">
+            <div class="col-md-6 my-3">
+                <h2 class="titleText">Welcome</h2>
+                <p>This website is the artifact in partial fulfilment of BSc Computer Science @ University of Lincoln,
+                    The artefact is created and supervised by</p>
+                <ul>
+                    <li>Connor Bull (19702845)</li>
+                    <li>Supervisor</li>
                 </ul>
+                <p>The aim of this project is to analyse Lincolnshire crime data using a series of different python
+                    tools while also using machine learning to measure the outcome of crime predictions</p>
             </div>
-        </nav>
-
-        <section class="welcome container my-3" id="S1">
-            <div class="row">
-                <div class="col-md-6 my-3">
-                    <h2 class="titleText">Welcome</h2>
-                    <p>This website is the artifact in partial fulfilment of BSc Computer Science @ University of Lincoln, The artefact is created and supervised by</p>
-                    <ul>
-                        <li>Connor Bull (19702845)</li>
-                        <li>Supervisor</li>
-                    </ul>
-                    <p>The aim of this project is to analyse Lincolnshire crime data using a series of different python tools while also using machine learning to measure the outcome of crime predictions</p>
-                </div>
-                <div class="col-md-6 d-none d-md-flex justify-items-center">
-                    <img class="align-self-center w-100" src="static/images/pexels-lukas-669610.jpg">
-                </div>
+            <div class="col-md-6 d-none d-md-flex justify-items-center">
+                <img class="align-self-center w-100" src="static/images/pexels-lukas-669610.jpg">
             </div>
-        </section>
+        </div>
+    </section>
 
-        <hr>
+    <hr>
 
-        <section class="container crimemap" id="crime-map-section">
+    <section class="container crimemap" id="crime-map-section">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-header">
-                        <h2>Overview of Lincolnshire crime</h2>
-                        <p>The map below shows the locations of crime occurence in the form of a heatmap <strong>per</strong> crime reported <strong>cumulative</strong> (The total number of cases in that region so far) figures.
-                        </p>
-                        <p>The data is for the dates <strong>01/01/2020</strong> until <strong>31/12/2020</strong> inclusive.</p>
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header">
+                    <h2>Overview of Lincolnshire crime</h2>
+                    <p>The map below shows the locations of crime occurence in the form of a heatmap
+                        <strong>per</strong> crime reported <strong>cumulative</strong> (The total number of cases in
+                        that region so far) figures.
+                    </p>
+                    <p>The data is for the dates <strong>01/01/2020</strong> until <strong>31/12/2020</strong>
+                        inclusive.</p>
                 </div>
             </div>
-
-            <div id='map'></div>
-
-            
-
-        </section>
-
-        <hr>
-
-
-        <footer class="py-5 px-2 px-md-0">
-            <div class="container">
-                <div class="row">
-                    <div class="sec col-md-6" id="footer-quick-links">
-                        <h2>Quick Links</h2>
-                        <ul>
-                            <li><a href="">Home</a></li>
-                            <li><a href="">2021 Crime Heatmap</a></li>
-                            <li><a href="">2021 Crime Statistics</a></li>
-                            <li><a href="">2021 Crime forecasting</a></li>
-                        </ul>
-                    </div>
-                    <div class="sec col-md-6" id="footer-creator">
-                        <h2>Developed & Supervised by:</h2>
-                        <p>Connor Bull (19702845)</p>
-                        <p>Supervisor</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <div class="copyrightText">
-            <p>Copyright © 2021 University Of Lincoln. All Rights Reserved.</p>
         </div>
 
+        <div id='map'></div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <script>
-        
-        let mapData = await fetch('/map').then(dataG => dataG.json())
-        mapboxgl.accessToken = 
-        'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpNmZubHNqMiJ9.4Fd-52wvMYZgiKLdJr9p0w';
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/dark-v10',
-            center: [-79.999732, 40.4374],
-            zoom: 11
-        });
+
+    </section>
+
+    <hr>
+
+
+    <footer class="py-5 px-2 px-md-0">
+        <div class="container">
+            <div class="row">
+                <div class="sec col-md-6" id="footer-quick-links">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">2021 Crime Heatmap</a></li>
+                        <li><a href="">2021 Crime Statistics</a></li>
+                        <li><a href="">2021 Crime forecasting</a></li>
+                    </ul>
+                </div>
+                <div class="sec col-md-6" id="footer-creator">
+                    <h2>Developed & Supervised by:</h2>
+                    <p>Connor Bull (19702845)</p>
+                    <p>Supervisor</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyrightText">
+        <p>Copyright © 2021 University Of Lincoln. All Rights Reserved.</p>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        (async function () {
+            let mapData = await fetch('/map').then(dataG => dataG.json())
+            mapboxgl.accessToken =
+                'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpNmZubHNqMiJ9.4Fd-52wvMYZgiKLdJr9p0w';
+            const map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/dark-v10',
+                center: [-79.999732, 40.4374],
+                zoom: 11
+            });
             map.on('load', () => {
                 map.addSource('map', {
                     type: 'geojson',
                     data: mapData
                 });
+
                 map.addLayer(
                     {
                         id: 'crime-heat',
@@ -146,7 +164,7 @@
                                 type: 'exponential',
                                 stops: [
                                     [1, 0],
-                                    [62,1]
+                                    [62, 1]
                                 ]
                             },
                             'heatmap-intensity': {
@@ -186,53 +204,56 @@
                         }
                     },
                     'waterway-label'
-                    );
+                );
 
-                    map.addLayer(
-                        {
-                            'id': 'crime-point',
-                            'type': 'circle',
-                            'source': mapData,
-                            'minzoom': 14,
-                            'paint': {
-                                // increase the radius of the circle as the zoom level and dbh value increases
-                                'circle-radius': {
-                                    'property': 'Crime type',
-                                    'type': 'exponential',
-                                    'stops': [
-                                        [{ zoom: 15, value: 1 }, 5],
-                                        [{ zoom: 15, value: 62 }, 10],
-                                        [{ zoom: 22, value: 1 }, 20],
-                                        [{ zoom: 22, value: 62 }, 50]
-                                    ]
-                                },
-                                'circle-color': {
-                                    'property': 'dbh',
-                                    'type': 'exponential',
-                                    'stops': [
-                                        [0, 'rgba(236,222,239,0)'],
-                                        [10, 'rgb(236,222,239)'],
-                                        [20, 'rgb(208,209,230)'],
-                                        [30, 'rgb(166,189,219)'],
-                                        [40, 'rgb(103,169,207)'],
-                                        [50, 'rgb(28,144,153)'],
-                                        [60, 'rgb(1,108,89)']
-                                    ]
-                                },
-                                'circle-stroke-color': 'white',
-                                'circle-stroke-width': 1,
-                                'circle-opacity': {
-                                    'stops': [
-                                        [14, 0],
-                                        [15, 1]
-                                    ]
-                                }
+                map.addLayer(
+                    {
+                        'id': 'crime-point',
+                        'type': 'circle',
+                        'source': mapData,
+                        'minzoom': 14,
+                        'paint': {
+                            // increase the radius of the circle as the zoom level and dbh value increases
+                            'circle-radius': {
+                                'property': 'Crime type',
+                                'type': 'exponential',
+                                'stops': [
+                                    [{ zoom: 15, value: 1 }, 5],
+                                    [{ zoom: 15, value: 62 }, 10],
+                                    [{ zoom: 22, value: 1 }, 20],
+                                    [{ zoom: 22, value: 62 }, 50]
+                                ]
+                            },
+                            'circle-color': {
+                                'property': 'dbh',
+                                'type': 'exponential',
+                                'stops': [
+                                    [0, 'rgba(236,222,239,0)'],
+                                    [10, 'rgb(236,222,239)'],
+                                    [20, 'rgb(208,209,230)'],
+                                    [30, 'rgb(166,189,219)'],
+                                    [40, 'rgb(103,169,207)'],
+                                    [50, 'rgb(28,144,153)'],
+                                    [60, 'rgb(1,108,89)']
+                                ]
+                            },
+                            'circle-stroke-color': 'white',
+                            'circle-stroke-width': 1,
+                            'circle-opacity': {
+                                'stops': [
+                                    [14, 0],
+                                    [15, 1]
+                                ]
                             }
-                        },
-                        'waterway-label'
-                        );
-                    });
-        </script>
-    </body>
-</html>
+                        }
+                    },
+                    'waterway-label'
+                );
+            });
 
+        })
+
+
+    </script>
+</body>
+</html>
