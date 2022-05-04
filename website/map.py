@@ -10,6 +10,8 @@ df = df.drop(columns=['Context', 'Crime ID', 'Reported by', 'Falls within', 'Las
 
 
 
+
+
 map = folium.Map(location=[53.1741,0.4503],
                         zoom_start=11,
                         tiles="openstreetmap")
@@ -48,4 +50,3 @@ HeatMap(
 folium.LayerControl().add_to(map)
 
 html_map = map._repr_html_()
-
