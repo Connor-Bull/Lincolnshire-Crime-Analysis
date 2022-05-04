@@ -62,13 +62,22 @@ body {
     font-size: 18px;
 }
 
-#map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-  }
+.map {
+    height: 85vh;
+}
 
+.map-container {
+    position: relative;
+}
+
+#map-background-container {
+    background-color: white;
+    padding: 2em;
+}
+
+#map-controls {
+    margin-bottom: 1em;
+}
 
 footer {
     position: relative;
