@@ -62,19 +62,12 @@ body {
     font-size: 18px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
 
 
 footer {

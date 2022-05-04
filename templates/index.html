@@ -12,7 +12,10 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
-        
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+
+
         <!-- style.css -->
         <link rel="stylesheet" type="text/css" href="static/index.css" />
 
@@ -76,6 +79,10 @@
                 </div>
             </div>
 
+            <div id='map'></div>
+
+            
+
         </section>
 
         <hr>
@@ -104,10 +111,133 @@
         <div class="copyrightText">
             <p>Copyright © 2021 University Of Lincoln. All Rights Reserved.</p>
         </div>
+
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+        mapboxgl.accessToken = 
+        'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpNmZubHNqMiJ9.4Fd-52wvMYZgiKLdJr9p0w';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/dark-v10',
+            center: [-79.999732, 40.4374],
+            zoom: 11
+        });
+            map.on('load', () => {
+                map.addSource('map', {
+                    type: 'geojson',
+                    data: './map.geojson'
+                });
+                map.addLayer(
+                    {
+                        id: 'crime-heat',
+                        type: 'heatmap',
+                        source: 'map',
+                        maxzoom: 15,
+                        paint: {
+                            'heatmap-weight': {
+                                property: 'Crime type',
+                                type: 'exponential',
+                                stops: [
+                                    [1, 0],
+                                    [62,1]
+                                ]
+                            },
+                            'heatmap-intensity': {
+                                stops: [
+                                    [11, 1],
+                                    [15, 3]
+                                ]
+                            },
+                            'heatmap-color': [
+                                'interpolate',
+                                ['linear'],
+                                ['heatmap-density'],
+                                0,
+                                'rgba(236,222,239,0)',
+                                0.2,
+                                'rgb(208,209,230)',
+                                0.4,
+                                'rgb(166,189,219)',
+                                0.6,
+                                'rgb(103,169,207)',
+                                0.8,
+                                'rgb(28,144,153)'
+                            ],
+                            'heatmap-radius': {
+                                stops: [
+                                    [11, 15],
+                                    [15, 20]
+                                ]
+                            },
+                            'heatmap-opacity': {
+                                default: 1,
+                                stops: [
+                                    [14, 1],
+                                    [15, 0]
+                                ]
+                            }
+                        }
+                    },
+                    'waterway-label'
+                    );
+
+                    map.addLayer(
+                        {
+                            'id': 'crime-point',
+                            'type': 'circle',
+                            'source': 'crime',
+                            'minzoom': 14,
+                            'paint': {
+                                // increase the radius of the circle as the zoom level and dbh value increases
+                                'circle-radius': {
+                                    'property': 'Crime type',
+                                    'type': 'exponential',
+                                    'stops': [
+                                        [{ zoom: 15, value: 1 }, 5],
+                                        [{ zoom: 15, value: 62 }, 10],
+                                        [{ zoom: 22, value: 1 }, 20],
+                                        [{ zoom: 22, value: 62 }, 50]
+                                    ]
+                                },
+                                'circle-color': {
+                                    'property': 'dbh',
+                                    'type': 'exponential',
+                                    'stops': [
+                                        [0, 'rgba(236,222,239,0)'],
+                                        [10, 'rgb(236,222,239)'],
+                                        [20, 'rgb(208,209,230)'],
+                                        [30, 'rgb(166,189,219)'],
+                                        [40, 'rgb(103,169,207)'],
+                                        [50, 'rgb(28,144,153)'],
+                                        [60, 'rgb(1,108,89)']
+                                    ]
+                                },
+                                'circle-stroke-color': 'white',
+                                'circle-stroke-width': 1,
+                                'circle-opacity': {
+                                    'stops': [
+                                        [14, 0],
+                                        [15, 1]
+                                    ]
+                                }
+                            }
+                        },
+                        'waterway-label'
+                        );
+                    });
+                    
+                    map.on('click', 'trees-point', (event) => {
+                        new mapboxgl.Popup()
+                        .setLngLat(event.features[0].geometry.coordinates)
+                        .setHTML(`<strong>DBH:</strong> ${event.features[0].properties.dbh}`)
+                        .addTo(map);
+                    });
+        </script>
     </body>
 </html>
 
