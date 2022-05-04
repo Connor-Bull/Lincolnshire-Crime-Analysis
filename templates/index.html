@@ -119,6 +119,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
+        
+        let mapData = await fetch('/map').then(dataG => dataG.json())
         mapboxgl.accessToken = 
         'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpNmZubHNqMiJ9.4Fd-52wvMYZgiKLdJr9p0w';
         const map = new mapboxgl.Map({
@@ -130,13 +132,13 @@
             map.on('load', () => {
                 map.addSource('map', {
                     type: 'geojson',
-                    data: './map.geojson'
+                    data: mapData
                 });
                 map.addLayer(
                     {
                         id: 'crime-heat',
                         type: 'heatmap',
-                        source: 'map',
+                        source: mapData,
                         maxzoom: 15,
                         paint: {
                             'heatmap-weight': {
@@ -190,7 +192,7 @@
                         {
                             'id': 'crime-point',
                             'type': 'circle',
-                            'source': 'map',
+                            'source': mapData,
                             'minzoom': 14,
                             'paint': {
                                 // increase the radius of the circle as the zoom level and dbh value increases
@@ -229,13 +231,6 @@
                         },
                         'waterway-label'
                         );
-                    });
-                    
-                    map.on('click', 'trees-point', (event) => {
-                        new mapboxgl.Popup()
-                        .setLngLat(event.features[0].geometry.coordinates)
-                        .setHTML(`<strong>DBH:</strong> ${event.features[0].properties.dbh}`)
-                        .addTo(map);
                     });
         </script>
     </body>
