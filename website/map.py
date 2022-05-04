@@ -49,4 +49,4 @@ HeatMap(
     name="Crimes by Heatmap").add_to(map)
 folium.LayerControl().add_to(map)
 
-html_map = map._repr_html_()
+
