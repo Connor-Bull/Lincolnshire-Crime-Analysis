@@ -10,5 +10,5 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpN
 
 map.addSource('Crime', {
     type: 'geojson',
-    data: 'data/map.geojson'
+    data: './data/map.geojson'
   });
