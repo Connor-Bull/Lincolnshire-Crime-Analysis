@@ -49,7 +49,7 @@ map.on('load', () => {
     map.addLayer({
         id: 'cluster-count',
         type: 'symbol',
-        source: 'earthquakes',
+        source: 'map',
         filter: ['has', 'point_count'],
         layout: {
             'text-field': '{point_count_abbreviated}',
