@@ -92,6 +92,7 @@ map.on('load', () => {
     map.on('click', 'unclustered-point', (e) => {
         const coordinates = e.features[0].geometry.coordinates.slice();
         const description = e.features[0].properties.Crime;
+        const location = e.features[0].properties.Location;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -99,6 +100,7 @@ map.on('load', () => {
         new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
+            .setHTML(location)
             .addTo(map);
     });
 
