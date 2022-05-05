@@ -9,7 +9,7 @@ const map = new mapboxgl.Map({
 map.on('load', () => {
     map.addSource('trees', {
         'type': 'geojson',
-        'data': './data/trees.geojson'
+        'data': 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/trees.geojson?token=GHSAT0AAAAAABUBG7BMHUGZVYQCQ2AGXW7GYTT3MVA'
     });
 
     map.addLayer(
