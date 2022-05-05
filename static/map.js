@@ -99,8 +99,7 @@ map.on('load', () => {
         }
         new mapboxgl.Popup()
             .setLngLat(coordinates)
-            .setHTML(description)
-            .setHTML(location)
+            .setHTML(description, location)
             .addTo(map);
     });
 
