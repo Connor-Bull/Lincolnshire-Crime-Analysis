@@ -5,3 +5,5 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpN
             center: [53.228848, -0.54973125],
             zoom: 11
         });
+
+//test
