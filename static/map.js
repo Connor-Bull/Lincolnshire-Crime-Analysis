@@ -116,5 +116,13 @@ map.on('load', () => {
     );
 });
 
+// click on tree to view dbh in a popup
+map.on('click', 'map-point', (event) => {
+    new mapboxgl.Popup()
+        .setLngLat(event.features[0].geometry.coordinates)
+        .setHTML(`<strong>Crime type:</strong> ${event.features[0].properties.Crimetypes}`)
+        .setHTML(`<strong>Location:</strong> ${event.features[0].properties.Location}`)
+        .addTo(map);
+});
 
 
