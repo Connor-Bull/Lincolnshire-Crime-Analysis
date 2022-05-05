@@ -9,18 +9,18 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpN
 map.on('load', () => {
     map.addSource('map', {
         type: 'geojson',
-        data: './data/map.geojson'
+        data: '/data/map.geojson'
     });
     map.addLayer(
         {
-            id: 'trees-heat',
+            id: 'crime-heat',
             type: 'heatmap',
             source: 'map',
             maxzoom: 15,
             paint: {
                 // increase weight as diameter breast height increases
                 'heatmap-weight': {
-                    property: 'dbh',
+                    property: 'Crime types',
                     type: 'exponential',
                     stops: [
                         [1, 0],
@@ -72,14 +72,14 @@ map.on('load', () => {
 
     map.addLayer(
         {
-            id: 'trees-point',
+            id: 'crime-point',
             type: 'circle',
             source: 'map',
             minzoom: 14,
             paint: {
                 // increase the radius of the circle as the zoom level and dbh value increases
                 'circle-radius': {
-                    property: 'dbh',
+                    property: 'Crime type',
                     type: 'exponential',
                     stops: [
                         [{ zoom: 15, value: 1 }, 5],
