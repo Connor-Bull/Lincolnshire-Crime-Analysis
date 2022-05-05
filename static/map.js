@@ -10,3 +10,4 @@ map.addSource('map', {
 type: 'geojson',
 data: 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/map.geojson?token=GHSAT0AAAAAABUBG7BNIK2XRLTH45MRRU3IYTTZ7MQ'
 });
+
