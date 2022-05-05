@@ -7,21 +7,21 @@ const map = new mapboxgl.Map({
 });
 
 map.on('load', () => {
-    map.addSource('trees', {
+    map.addSource('map', {
         'type': 'geojson',
-        'data': 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/trees.geojson?token=GHSAT0AAAAAABUBG7BMHUGZVYQCQ2AGXW7GYTT3MVA'
+        'data': 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/map.geojson?token=GHSAT0AAAAAABUBG7BMXZ6MSXYNZGW3YL7CYTT3VCA'
     });
 
     map.addLayer(
         {
-            'id': 'trees-heat',
+            'id': 'map-heat',
             'type': 'heatmap',
-            'source': 'trees',
+            'source': 'map',
             'maxzoom': 15,
             'paint': {
                 // increase weight as diameter breast height increases
                 'heatmap-weight': {
-                    'property': 'dbh',
+                    'property': 'Crime type',
                     'type': 'exponential',
                     'stops': [
                         [1, 0],
@@ -73,14 +73,14 @@ map.on('load', () => {
 
     map.addLayer(
         {
-            'id': 'trees-point',
+            'id': 'map-point',
             'type': 'circle',
-            'source': 'trees',
+            'source': 'map',
             'minzoom': 14,
             'paint': {
                 // increase the radius of the circle as the zoom level and dbh value increases
                 'circle-radius': {
-                    'property': 'dbh',
+                    'property': 'Crime type',
                     'type': 'exponential',
                     'stops': [
                         [{ zoom: 15, value: 1 }, 5],
@@ -90,7 +90,7 @@ map.on('load', () => {
                     ]
                 },
                 'circle-color': {
-                    'property': 'dbh',
+                    'property': 'Crime type',
                     'type': 'exponential',
                     'stops': [
                         [0, 'rgba(236,222,239,0)'],
@@ -116,12 +116,5 @@ map.on('load', () => {
     );
 });
 
-// click on tree to view dbh in a popup
-map.on('click', 'trees-point', (event) => {
-    new mapboxgl.Popup()
-        .setLngLat(event.features[0].geometry.coordinates)
-        .setHTML(`<strong>DBH:</strong> ${event.features[0].properties.dbh}`)
-        .addTo(map);
-});
 
 
