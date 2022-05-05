@@ -76,7 +76,7 @@ map.on('load', () => {
             layers: ['clusters']
         });
         const clusterId = features[0].properties.cluster_id;
-        map.getSource('earthquakes').getClusterExpansionZoom(
+        map.getSource('map').getClusterExpansionZoom(
             clusterId,
             (err, zoom) => {
                 if (err) return;
