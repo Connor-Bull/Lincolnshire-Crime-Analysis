@@ -6,4 +6,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpN
             zoom: 11
         });
 
-//test
+//test 
+
+map.addSource('Crime', {
+    type: 'geojson',
+    data: 'https://github.com/Connor-Bull/Lincolnshire-Crime-Analysis/blob/main/data/map.geojson'
+  });
