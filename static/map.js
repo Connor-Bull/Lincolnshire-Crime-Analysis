@@ -1,119 +1,113 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpNmZubHNqMiJ9.4Fd-52wvMYZgiKLdJr9p0w';
 const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v10',
-    center: [-79.999732, 40.4374],
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-53.228848, -0.54973125],
     zoom: 11
 });
 
 map.on('load', () => {
     map.addSource('map', {
-        'type': 'geojson',
-        'data': 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/map.geojson?token=GHSAT0AAAAAABUBG7BMXZ6MSXYNZGW3YL7CYTT3VCA'
+        type: 'geojson',
+        data: 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/map.geojson?token=GHSAT0AAAAAABUBG7BMXZ6MSXYNZGW3YL7CYTT3VCA',
+        cluster: true,
+        clusterMaxZoom: 14,  
     });
 
-    map.addLayer(
-        {
-            'id': 'map-heat',
-            'type': 'heatmap',
-            'source': 'map',
-            'maxzoom': 15,
-            'paint': {
-                // increase weight as diameter breast height increases
-                'heatmap-weight': {
-                    'property': 'Crime type',
-                    'type': 'exponential',
-                    'stops': [
-                        [1, 0],
-                        [62, 1]
-                    ]
-                },
-                // increase intensity as zoom level increases
-                'heatmap-intensity': {
-                    'stops': [
-                        [11, 1],
-                        [15, 3]
-                    ]
-                },
-                // use sequential color palette to use exponentially as the weight increases
-                'heatmap-color': [
-                    'interpolate',
-                    ['linear'],
-                    ['heatmap-density'],
-                    0,
-                    'rgba(236,222,239,0)',
-                    0.2,
-                    'rgb(208,209,230)',
-                    0.4,
-                    'rgb(166,189,219)',
-                    0.6,
-                    'rgb(103,169,207)',
-                    0.8,
-                    'rgb(28,144,153)'
-                ],
-                // increase radius as zoom increases
-                'heatmap-radius': {
-                    'stops': [
-                        [11, 15],
-                        [15, 20]
-                    ]
-                },
-                // decrease opacity to transition into the circle layer
-                'heatmap-opacity': {
-                    'default': 1,
-                    'stops': [
-                        [14, 1],
-                        [15, 0]
-                    ]
-                }
-            }
-        },
-        'waterway-label'
-    );
+    map.addLayer({
+        id: 'clusters',
+        type: 'circle',
+        source: 'map',
+        filter: ['has', 'point_count'],
+        paint: {
+            // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+            // with three steps to implement three types of circles:
+            //   * Blue, 20px circles when point count is less than 100
+            //   * Yellow, 30px circles when point count is between 100 and 750
+            //   * Pink, 40px circles when point count is greater than or equal to 750
+            'circle-color': [
+                'step',
+                ['get', 'point_count'],
+                '#51bbd6',
+                100,
+                '#f1f075',
+                750,
+                '#f28cb1'
+            ],
+            'circle-radius': [
+                'step',
+                ['get', 'point_count'],
+                20,
+                100,
+                30,
+                750,
+                40
+            ]
+        }
+    });
 
-    map.addLayer(
-        {
-            'id': 'map-point',
-            'type': 'circle',
-            'source': 'map',
-            'minzoom': 14,
-            'paint': {
-                // increase the radius of the circle as the zoom level and dbh value increases
-                'circle-radius': {
-                    'property': 'Crime type',
-                    'type': 'exponential',
-                    'stops': [
-                        [{ zoom: 15, value: 1 }, 5],
-                        [{ zoom: 15, value: 62 }, 10],
-                        [{ zoom: 22, value: 1 }, 20],
-                        [{ zoom: 22, value: 62 }, 50]
-                    ]
-                },
-                'circle-color': {
-                    'property': 'Crime type',
-                    'type': 'exponential',
-                    'stops': [
-                        [0, 'rgba(236,222,239,0)'],
-                        [10, 'rgb(236,222,239)'],
-                        [20, 'rgb(208,209,230)'],
-                        [30, 'rgb(166,189,219)'],
-                        [40, 'rgb(103,169,207)'],
-                        [50, 'rgb(28,144,153)'],
-                        [60, 'rgb(1,108,89)']
-                    ]
-                },
-                'circle-stroke-color': 'white',
-                'circle-stroke-width': 1,
-                'circle-opacity': {
-                    'stops': [
-                        [14, 0],
-                        [15, 1]
-                    ]
-                }
+    map.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'earthquakes',
+        filter: ['has', 'point_count'],
+        layout: {
+            'text-field': '{point_count_abbreviated}',
+            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            'text-size': 12
+        }
+    });
+
+    map.addLayer({
+        id: 'unclustered-point',
+        type: 'circle',
+        source: 'map',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+            'circle-color': '#11b4da',
+            'circle-radius': 4,
+            'circle-stroke-width': 1,
+            'circle-stroke-color': '#fff'
+        }
+    });
+
+    map.on('click', 'clusters', (e) => {
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: ['clusters']
+        });
+        const clusterId = features[0].properties.cluster_id;
+        map.getSource('earthquakes').getClusterExpansionZoom(
+            clusterId,
+            (err, zoom) => {
+                if (err) return;
+
+                map.easeTo({
+                    center: features[0].geometry.coordinates,
+                    zoom: zoom
+                });
             }
-        },
-        'waterway-label'
-    );
+        );
+    });
+
+    map.on('click', 'unclustered-point', (e) => {
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const description = e.features[0].properties.Crime;
+
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
+
+    map.on('mouseenter', 'clusters', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', 'clusters', () => {
+        map.getCanvas().style.cursor = '';
+    });
 });
 
 
