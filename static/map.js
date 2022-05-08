@@ -1,6 +1,6 @@
 (async function () {
 
-    let mapGet = fetch("/counties").then(data => data.json())
+    let mapGet = fetch("/map").then(data => data.json())
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiMTk3MDI4NDUiLCJhIjoiY2wycnk5ZHZkMDBxODNjb2JpNmZubHNqMiJ9.4Fd-52wvMYZgiKLdJr9p0w';
     const map = new mapboxgl.Map({
