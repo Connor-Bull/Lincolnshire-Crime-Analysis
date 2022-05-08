@@ -9,7 +9,7 @@ const map = new mapboxgl.Map({
 map.on('load', () => {
     map.addSource('map', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/Connor-Bull/Lincolnshire-Crime-Analysis/main/data/map.geojson?token=GHSAT0AAAAAABUBG7BNSZB3T2BXPJI734BYYTYBH3Q',
+        data: 'https://data.police.uk/api/crimes-street/all-crime?lat=53.074935&lng=-0.059269&date=2021',
         cluster: true,
         clusterMaxZoom: 14,  
     });
