@@ -116,7 +116,7 @@ body {
 	right: 30px;
 }
 .slider .slider-items .item img{
-    right:300px;
+    left:300px;
 	max-width: 100%;
 	display: block;
 	animation:zoom 1s ease;
