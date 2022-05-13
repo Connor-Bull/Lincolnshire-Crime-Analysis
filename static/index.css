@@ -116,10 +116,11 @@ body {
 	right: 30px;
 }
 .slider .slider-items .item img{
-    left:300px;
 	max-width: 100%;
 	display: block;
 	animation:zoom 1s ease;
+    object-fit: none;
+    object-position: center top;
 }
 
 @keyframes zoom{
