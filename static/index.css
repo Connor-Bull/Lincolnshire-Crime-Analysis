@@ -80,7 +80,6 @@ body {
 }
 
 
-
 .slider{
 	max-width: 1700px;
 	border:10px solid  #343a40;
@@ -149,12 +148,6 @@ font-size: 30px;
 .slider .slider-items .item.active{
 	display: block;
 }
-
-
-
-
-
-
 
 
 footer {
