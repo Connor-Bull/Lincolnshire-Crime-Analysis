@@ -672,21 +672,20 @@
             </p>
         </div>
         <div class="col-md-6">
-            <h4>Data.Polce Dataset</h4>
+            <h4>Data.Police Dataset</h4>
             <p>At the time of writing the Lincolnshire Data set can be found at <a href="https://data.police.uk/data/"
-                    rel="noopener" target="_blank">Data.Poilce downloads</a>. when opened, and
-                option to select different counties is given with drop downs of the time frame.</p>
+                    rel="noopener" target="_blank">Data.Poilce downloads</a>. when opened, an
+                option to select different counties is given with drop downs of the time frame. The features within the data are as folllows.</p>
             <ul>
-                <li>As expected, the number of flights sharply declined at the end of March 2020 to just under 20% of
-                    the number beforehand.</li>
-                <li>Even within the first national lockdown, the number of remaining flights remained steady which has
-                    been shown in other research to be cargo flights.</li>
-                <li>After the first national lockdown, flights still only returned to around 80% of the pre-covid number
-                    showing a reluctance of people to travel.</li>
-                <li>Even though the COVID-19 cases from October onwards rose much more quickly than in March, the affect
-                    on the number of flights was not as dramatic as in March. The number of flights only reduced to
-                    around 40% of the pre-covid amount;
-                    twice the number in the first national lockdown.</li>
+                <li>Crime ID: a unique identifyer for crime records, this feature got dropped as there was no use for this during our analysis</li>
+                <li>Month: This features was used to produce the reports on the different crime types throughout the months of a year</li>
+                <li>Reported by / falls within: only signlas what polce departmented documented the crime</li>
+                <li>Longitude / latitude: These features was extracted into a geojson file in which helped build and create a script to map out crime points.</li>
+                <li>Location: Was used to calculate where the most crimes are comitted</li>
+                <li>LSOA Code / Name: These features where used to extract data that belonged to just Lincoln city for the map. </li>
+                <li>Crime type: This feature was used to extract exactly what crime type was comitted</li>
+                <li>Last Outcome: Used to identify what happened with the case</li>
+                <li>Context: Had no information due to security reassons. Was dropped from dataframe</li>
             </ul>
         </div>
         <div class="row">
