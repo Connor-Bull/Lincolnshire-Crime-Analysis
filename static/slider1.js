@@ -1,44 +1,20 @@
+let slideIndex = [1,1];
+/* Class the members of each slideshow group with different CSS classes */
+let slideId = ["mySlides1", "mySlides2"]
+showSlides(1, 0);
+showSlides(1, 1);
 
- var slides=document.querySelector('.slider-items').children;
- var nextSlide=document.querySelector(".right-slide");
-var prevSlide=document.querySelector(".left-slide");
-var totalSlides=slides.length;
-var index=0;
-
-nextSlide.onclick=function () {
-     next("next");
-}
-prevSlide.onclick=function () {
-     next("prev");
+function plusSlides(n, no) {
+  showSlides(slideIndex[no] += n, no);
 }
 
-function next(direction){
-
-   if(direction=="next"){
-      index++;
-       if(index==totalSlides){
-        index=0;
-       }
-   } 
-   else{
-           if(index==0){
-            index=totalSlides-1;
-           }
-           else{
-            index--;
-           }
-    }
-
-  for(i=0;i<slides.length;i++){
-          slides[i].classList.remove("active");
+function showSlides(n, no) {
+  let i;
+  let x = document.getElementsByClassName(slideId[no]);
+  if (n > x.length) {slideIndex[no] = 1}
+  if (n < 1) {slideIndex[no] = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
   }
-  slides[index].classList.add("active");     
-
+  x[slideIndex[no]-1].style.display = "block";
 }
-
-
-
-
-
-
-
