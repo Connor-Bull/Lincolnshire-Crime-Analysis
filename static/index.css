@@ -79,9 +79,10 @@ body {
     margin-bottom: 1em;
 }
 
+.mySlides {display:none;}
 
 * {box-sizing: border-box}
-.mySlides1, .mySlides2, .mySlides3  {display: none}
+.mySlides1, .mySlides2  {display: none}
 img {vertical-align: middle;}
 
 /* Slideshow container */
