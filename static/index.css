@@ -72,6 +72,14 @@ body {
 .mySlides1, .mySlides2  {display: none}
 img {vertical-align: middle;}
 
+
+.mySlides1, .mySlides2  {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+
+
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
